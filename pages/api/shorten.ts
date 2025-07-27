@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 
-const uri = "mongodb+srv://murariiisingh46:yT0vYAbQY9HSwytH@cluster0.mnv4r8g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = 'mongodb+srv://murariiisingh46:yT0vYAbQY9HSwytH@cluster0.mnv4r8g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const client = new MongoClient(uri);
 
 function generateRandomString(length: number) {
@@ -39,7 +39,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Save to DB
     await collection.insertOne({ url, shortCode });
 
-    res.status(200).json({ shortUrl: `https://your-domain.vercel.app/${shortCode}` });
+    // Use the provided domain for the short URL
+    const baseUrl = 'https://url-shortner-theta-green.vercel.app';
+    res.status(200).json({ shortUrl: `${baseUrl}/${shortCode}` });
   } catch (err) {
     res.status(500).json({ error: 'Internal server error' });
   } finally {
