@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 
 const uri = process.env.MONGODB_URI!;
@@ -13,7 +13,7 @@ function generateRandomString(length: number) {
   return result;
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -29,11 +29,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const collection = db.collection('urls');
 
     // Generate a unique short code
-    let shortCode;
+    let shortCode = '';
     let exists = true;
     while (exists) {
       shortCode = generateRandomString(6);
-      exists = await collection.findOne({ shortCode });
+      exists = Boolean(await collection.findOne({ shortCode }));
     }
 
     // Save to DB

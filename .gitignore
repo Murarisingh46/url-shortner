@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
+
+# Next.js build output
+.next/
+
+# Cache directories
+.cache/
