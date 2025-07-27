@@ -4,6 +4,15 @@ import { MongoClient } from 'mongodb';
 const uri = 'mongodb+srv://murariiisingh46:yT0vYAbQY9HSwytH@cluster0.mnv4r8g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const client = new MongoClient(uri);
 
+function isValidUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function generateRandomString(length: number) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -19,8 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const { url } = req.body;
-  if (!url) {
-    return res.status(400).json({ error: 'URL is required' });
+  if (!url || !isValidUrl(url)) {
+    return res.status(400).json({ error: 'Please provide a valid URL (must start with http:// or https://)' });
   }
 
   try {
