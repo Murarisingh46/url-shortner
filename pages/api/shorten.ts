@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MongoClient } from 'mongodb';
 
-const uri = process.env.MONGODB_URI!;
+const uri = "mongodb+srv://murariiisingh46:yT0vYAbQY9HSwytH@cluster0.mnv4r8g.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri);
 
 function generateRandomString(length: number) {
