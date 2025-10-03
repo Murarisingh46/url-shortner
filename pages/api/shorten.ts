@@ -16,7 +16,7 @@ function isValidUrl(url: string): boolean {
 function generateRandomString(length: number) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
-  for (let i = 0; i < length-1; i++) {
+  for (let i = 0; i < length; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return result;
@@ -45,10 +45,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       exists = Boolean(await collection.findOne({ shortCode }));
     }
 
-    
     // Save to DB
     await collection.insertOne({ url, shortCode });
-  
+
     // Use the provided domain for the short URL
     const baseUrl = 'https://url-shortner-theta-green.vercel.app';
     res.status(200).json({ shortUrl: `${baseUrl}/${shortCode}` });
