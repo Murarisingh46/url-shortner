@@ -98,7 +98,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="text-blue-600 font-bold text-xl mb-2">3</div>
               <h3 className="font-medium mb-2">Share anywhere</h3>
-              <p className="text-gray-600">Use your short link in messages, posts, or emails</p>
+              <p className="text-gray-600">Use your short link in messages, posts, or emails and good to go</p>
             </div>
           </div>
         </div>
